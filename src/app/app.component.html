@@ -1,15 +1,17 @@
-<div>
+
+<!-- --------------- Раздел айтемов --------------- -->
+
+<div class="items">
     <h3>Айтемы</h3>
 
     <!-- Форма для добавления -->
     <div> 
         <table>
             <tr> 
-                <td><input type="text" [(ngModel)]="text"></td> 
-                <td class="cat-icon"></td>
-                <td> <input type="text" [(ngModel)]="price"></td> 
-                <!-- <td><input type="text"></td> -->
-                <td><button (click)="addItem(text, price)">Добавить</button></td>
+                <td><input type="text" [(ngModel)]="text" placeholder="Описание"></td> 
+                <td><input type="text" [(ngModel)]="category" placeholder="Категория"></td>
+                <td> <input type="text" [(ngModel)]="price" placeholder="Сумма"></td> 
+                <td><button (click)="addItem(text, price, category)">Добавить</button></td>
             </tr>
         </table>
          
@@ -21,18 +23,66 @@
             <tr>
                 <th>Айтем</th>
                 <th class="cat-icon"></th>
-                <th>Место</th>
+                <th>Категория</th>
                 <th>Сумма</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let item of items"> 
                 <td>{{item.purchase}}</td> 
-                <td class="cat-icon">  <span class="dot red"></span>  </td>
-                <td> Единица</td> 
+                <td class="cat-icon">  <span class="dot" [style.background-color]="item.category.color"></span>  </td>
+                <td> {{item.category.name}}</td> 
                 <td>{{item.price}}</td> 
             </tr>
         </tbody>
         
     </table>
+</div>
+
+<!-- --------------- Раздел категорий --------------- -->
+
+<div class="categories">
+                
+    <h3>Категории</h3>
+
+    <table class="bordered">
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th class="cat-icon"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let category of categories"> 
+                <td>{{category.name}}</td> 
+                <td class="cat-icon">  <span class="dot" [style.background-color]="category.color"></span>  </td>
+            </tr>
+        </tbody>
+        
+    </table>
+
+</div>
+
+<!-- --------------- Раздел компаний --------------- -->
+
+<div class="companies">
+
+    <h3>Компании</h3>
+
+    <table class="bordered">
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th class="cat-icon"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let company of companies"> 
+                    <td>{{company.name}}</td> 
+                    <td class="cat-icon">  <span class="dot" [style.background-color]="company.color"></span>  </td>
+                </tr>
+            </tbody>
+            
+        </table>
+
 </div>
