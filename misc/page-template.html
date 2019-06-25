@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>checkout</title>
+        <style>
+            /* ------ visual studio цвета ------ */
+            /* :root{
+                --page-bg-color: #303030;
+                --page-block-color: #383838;
+                --page-light-color: #454545;
+                --text-color: #ededed;
+                --text-sub-color: #636363;
+                --border-radius-medium: 5px;
+            } */
+            /* ------ discord цвета ------ */
+            :root{
+                --page-bg-color: #2E3136;
+                --page-block-color: #35393F;
+                --page-light-color: #474B51;
+                --text-color: #D2D3D4;
+                --text-sub-color: #71767D;
+                --border-radius-medium: 5px;
+            }
+            *{
+                color: var(--text-color);
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 8pt;
+            }
+            body{ background-color: var(--page-bg-color);}
+            h6 {
+                font-size: 0.8em;
+                font-weight: normal;
+                color: var(--text-sub-color);
+                margin: 0px;
+            }
+            .grid-container {
+                margin: auto;
+                max-width: 480px;
+                height:100hv;
+                padding: 12px;
+                display: grid;
+                grid-template-areas: "header"
+                                     "items"
+                                     "categories"
+                                     "companies"
+                                     "footer";
+                grid-template-columns: 1fr;
+                grid-gap: 12px;
+                grid-template-rows: 12px auto auto auto 12px;
+            }
+            .header { grid-area: header; }
+            .items { grid-area: items; }
+            .categories { grid-area: categories; }
+            .companies { grid-area: companies; }
+            .footer { grid-area: footer; }
+            /* td{
+                border: 1px white solid;
+            } */
+            td{
+                padding: 4px; 
+            }
+            table{
+                table-layout: fixed;
+                width: 100%;
+                border-spacing: 0px;
+            }
+            .bordered{
+                border:solid var(--page-light-color) 1px;
+                border-radius: var(--border-radius-medium);
+                box-shadow: 0 0 16px #00000044;
+            }
+            .bordered td, th{
+                border-left: solid 1px var(--page-light-color);
+                border-top: solid 1px var(--page-light-color);
+                text-align: center;
+            }
+            .bordered tr:first-child td { border-top: none;}
+            .bordered td:first-child { border-left: none; }
+            .bordered tr:last-child td:first-child { border-radius: 0 0 0 var(--border-radius-medium); }
+            .bordered tr:last-child td:last-child { border-radius: 0 0 var(--border-radius-medium) 0; }
+            td.cat-icon {width: 12px;}
+            .bordered tr:nth-child(odd) { background-color: #00000044; }
+            .bordered tr:nth-child(even) { background-color: #00000022; }
+            input{
+                background-color: var(--page-bg-color);
+                color: var(--text-color);
+                border: 1px solid #1b1b1b;
+                border-radius: var(--border-radius-medium);
+                padding: 4px 8px;
+                box-shadow: inset 0 0 8px #00000044;
+            }
+            input:hover{
+                background-color: var(--page-block-color);
+            }
+            input[type="text"]{
+                width: 126px;
+                min-width: 28px;
+            }
+            .dot {
+                height: 8px;
+                width: 8px;
+                background-color: rgb(28, 98, 179);
+                border-radius: 50%;
+                border: 1px solid #00000044;
+                display: inline-block;
+            }
+            .red{ background-color: rgb(189, 84, 84); }
+            .green{ background-color: rgb(51, 134, 93); }
+            .yellow{ background-color: rgb(204, 192, 86); }
+            .blue{ background-color: rgb(28, 98, 179); }
+        </style>
+    </head>
+    <body>
+
+        
+
+        <div class="grid-container">
+
+            <div class="header"><h6>checkout v0, Шалахов Андрей</h6></div>
+
+            <div class="items">
+                
+                <h3>Айтемы</h3>
+
+                <div> 
+                    <table>
+                        <tr> <td><input type="text"></td>  <td class="cat-icon"></td><td> <input type="text"></td> <td><input type="text"></td> </tr>
+                    </table>
+                     
+                </div>
+
+                <table class="bordered">
+                    <tr> <td>Картошка</td> <td class="cat-icon"><span class="dot red"></span></td><td> Единица</td> <td>12.00</td> </tr>
+                    <tr><td>Апельсин</td>  <td class="cat-icon"><span class="dot green"></span></td><td> Шестёрка</td><td>19845.46</td></tr>
+                    <tr><td>Банан</td> <td class="cat-icon"><span class="dot yellow"></span></td><td> Пятёрка</td><td>145.09</td></tr>
+                    <tr><td>Яблоко</td> <td class="cat-icon"><span class="dot green"></span></td><td> Шестёрка</td><td>451.67</td></tr>
+                    <tr><td>Морковка</td> <td class="cat-icon"><span class="dot blue"></span></td><td> Восьмёрка</td><td>24.35</td></tr>
+                    <tr><td>Свёкла</td> <td class="cat-icon"><span class="dot red"></span></td><td> Единица</td><td>12332.23</td></tr>
+                    <tr><td>Мандарин</td> <td class="cat-icon"><span class="dot red"></span></td><td> Единица</td><td>234.5</td></tr>
+                </table>
+                
+            
+            </div>
+            
+            <div class="categories">
+                
+                <h3>Категории</h3>
+
+                <table class="bordered">
+                    <tr><td>Раз</td></tr>
+                    <tr><td>Два</td></tr>
+                    <tr><td>Три</td></tr>
+                    <tr><td>Четыре</td></tr>
+                </table>
+            
+            </div>
+
+            <div class="companies">
+            
+                <h3>Компании</h3>
+
+                <table class="bordered">
+                    <tr><td>Единица</td><td>Маленькая</td><td>12</td></tr>
+                    <tr><td>Пятёрка</td><td>Средняя</td><td>5</td></tr>
+                    <tr><td>Шестёрка</td><td>Большая</td><td>3</td></tr>
+                    <tr><td>Восьмёрка</td><td>Очень большая</td><td>198</td></tr>
+                </table>
+            
+            </div>
+
+            <div class="footer"><h6>end of the page, huh></h6></div>
+
+        </div>
+    </body>
+</html>
