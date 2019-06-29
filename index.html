@@ -111,10 +111,28 @@
                 background-color: var(--page-block-color);
             }
             input[type="text"]{
-                width: 126px;
+                width: 96px;
                 min-width: 28px;
             }
+            #addItemButton{
+                background-color: #1c6ae0;
+                font-family: "Arial Black", Helvetica, sans-serif;
+                font-weight: bold;
+
+                transition-property: box-shadow, background-color;
+                transition-duration: 0.2s;
+            }
+            #addItemButton:hover{
+                box-shadow: inset 0px 0px 4px #fff;
+                background-color: #e0a21c;
+            }
+
+            #addItemButton:active{
+                background-color: #e01c1c;
+            }
+
             .dot {
+                /* padding: 2px; */
                 height: 8px;
                 width: 8px;
                 background-color: rgb(28, 98, 179);

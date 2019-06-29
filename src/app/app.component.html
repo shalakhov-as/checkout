@@ -7,11 +7,17 @@
     <!-- Форма для добавления -->
     <div> 
         <table>
+            <tr>
+                <td><button (click)="saveData()">Сохранить</button></td>
+                <td><button (click)="loadData()">Загрузить</button></td>
+                <td><button (click)="downloadData()">Экспорт</button></td>
+                <td><button (click)="importData()">Импорт</button></td>
+            </tr>
             <tr> 
                 <td><input type="text" [(ngModel)]="text" placeholder="Описание"></td> 
                 <td><input type="text" [(ngModel)]="category" placeholder="Категория"></td>
-                <td> <input type="text" [(ngModel)]="price" placeholder="Сумма"></td> 
-                <td><button (click)="addItem(text, price, category)">Добавить</button></td>
+                <td><input type="text" [(ngModel)]="price" placeholder="Сумма"></td> 
+                <td><button id="addItemButton" (click)="addItem(text, price, category)">+</button></td>
             </tr>
         </table>
          
@@ -21,6 +27,7 @@
     <table class="bordered">
         <thead>
             <tr>
+                <th>Дата</th>
                 <th>Айтем</th>
                 <th class="cat-icon"></th>
                 <th>Категория</th>
@@ -29,8 +36,9 @@
         </thead>
         <tbody>
             <tr *ngFor="let item of items"> 
-                <td>{{item.purchase}}</td> 
-                <td class="cat-icon">  <span class="dot" [style.background-color]="item.category.color"></span>  </td>
+                <td>{{item.dateString}}</td> 
+                <td>{{item.name}}</td> 
+                <td>  <span class="dot" [style.background-color]="item.category.color"></span>  </td>
                 <td> {{item.category.name}}</td> 
                 <td>{{item.price}}</td> 
             </tr>
