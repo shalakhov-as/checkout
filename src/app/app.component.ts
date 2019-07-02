@@ -67,41 +67,9 @@ export class Company {
 })
 export class AppComponent implements OnInit{ 
 
-    categories: Category[] =
-    [
-        new Category("food", "Продукты", "#33cc33"),                    // 0
-        new Category("entertainment", "Развлечения", "#ffcc00"),        // 1
-        new Category("cafe", "Кафе", "#ff6600"),                       // 2
-        new Category("videogames", "Программы/видеоигры", "#cc0000"),   // 3
-        new Category("canteens", "Столовые", "#cc0066"),                // 4
-        new Category("electronics", "Электроника", "#ff00ff"),          // 5
-        new Category("transport", "Транспорт", "#3399ff"),              // 6
-        new Category("car-oil", "Заправка автомобиля", "#33cccc"),      // 7
-        new Category("car-misc", "Обслуживание автомобиля", "#cc99ff")  // 8
-    ]
-
-    companies: Company[] = 
-    [
-        // магазины
-        new Company("pyatorochka", "Пятёрочка", this.categories[0]),
-        new Company("vkusvill", "Вкусвилл", this.categories[0]),
-        new Company("miratorg", "Мираторг", this.categories[0]),
-        new Company("lenta", "Лента", this.categories[0]),
-
-        // остальное
-        new Company("gazprom-neft", "Газпром-нефть", this.categories[7]),
-        new Company("playstation-store", "Playstation Store", this.categories[3])
-    ]
-
-    items: Item[] = 
-    [
-        new Item("Огурец", 1221324, 1561727858000, this.companies[1]),
-        new Item("Помидор", 124.43, 1561727858000, this.companies[2]),
-        new Item("Ананас", 12.3, 1561727858000, this.companies[2]),
-        new Item("Апельсин", 124.34, 1561727858000, this.companies[1]),
-        new Item("Яблоко", 124323, 1561727858000, this.companies[2]),
-        new Item("Капуста", 1.4, 1561727858000, this.companies[1])
-    ];
+    categories: Category[] = [];
+    companies: Company[] = [];
+    items: Item[] = [];
 
     /** Добавляет новый айтем в коллекцию */
     addItem(text: string, price: number, company:string): void {
@@ -296,6 +264,6 @@ export class AppComponent implements OnInit{
     }
 
     ngOnInit() { 
-        // инициализация компонента
+        this.loadData();
     }
 }
