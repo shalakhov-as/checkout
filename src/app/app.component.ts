@@ -10,7 +10,6 @@ export class Item{
     readonly description: string;
     readonly timestamp: number;
     readonly price: number;
-    readonly category: Category;
     readonly company: Company;
 
     public get date(): Date {
@@ -22,10 +21,9 @@ export class Item{
         return this.date.toLocaleDateString('ru-RU', options);
     }
     
-    constructor(name: string, price: number, timestamp: number, category: Category, company: Company) {
+    constructor(name: string, price: number, timestamp: number, company: Company) {
         this.name = name;
         this.price = price;
-        this.category = category;
         this.company = company;
         this.timestamp = timestamp;
     }
@@ -53,12 +51,12 @@ export class Company {
     readonly key: string;
     readonly name: string;
     readonly description: string;
-    readonly color: string;
+    readonly category: Category;
 
-    constructor(key: string, name: string, color: string){
+    constructor(key: string, name: string, category: Category){
         this.key = key;
         this.name = name;
-        this.color = color;
+        this.category = category;
     }
 }
 
@@ -71,44 +69,55 @@ export class AppComponent implements OnInit{
 
     categories: Category[] =
     [
-        new Category("circles", "Кружки", "rgb(189, 84, 84)"),
-        new Category("quads", "Квадратики", "rgb(51, 134, 93)"),
-        new Category("polys", "Треугольнички", "rgb(204, 192, 86)"),
-        new Category("diamonds", "Ромбики", "rgb(28, 98, 179)")
+        new Category("food", "Продукты", "#33cc33"),                    // 0
+        new Category("entertainment", "Развлечения", "#ffcc00"),        // 1
+        new Category("cafe", "Кафе", "#ff6600"),                       // 2
+        new Category("videogames", "Программы/видеоигры", "#cc0000"),   // 3
+        new Category("canteens", "Столовые", "#cc0066"),                // 4
+        new Category("electronics", "Электроника", "#ff00ff"),          // 5
+        new Category("transport", "Транспорт", "#3399ff"),              // 6
+        new Category("car-oil", "Заправка автомобиля", "#33cccc"),      // 7
+        new Category("car-misc", "Обслуживание автомобиля", "#cc99ff")  // 8
     ]
 
     companies: Company[] = 
     [
-        new Company("cube", "Куб", "rgb(51, 134, 93)"),
-        new Company("sphere", "Шар", "rgb(189, 84, 84)"),
-        new Company("cylinder", "Цилиндр", "rgb(28, 98, 179)"),
-        new Company("brick", "Параллелепипед", "rgb(204, 192, 86)"),
+        // магазины
+        new Company("pyatorochka", "Пятёрочка", this.categories[0]),
+        new Company("vkusvill", "Вкусвилл", this.categories[0]),
+        new Company("miratorg", "Мираторг", this.categories[0]),
+        new Company("lenta", "Лента", this.categories[0]),
+
+        // остальное
+        new Company("gazprom-neft", "Газпром-нефть", this.categories[7]),
+        new Company("playstation-store", "Playstation Store", this.categories[3])
     ]
 
     items: Item[] = 
     [
-        new Item("Огурец", 1221324, 1561727858000, this.categories[0], this.companies[1]),
-        new Item("Помидор", 124.43, 1561727858000, this.categories[1], this.companies[2]),
-        new Item("Ананас", 12.3, 1561727858000, this.categories[2], this.companies[2]),
-        new Item("Апельсин", 124.34, 1561727858000, this.categories[3], this.companies[1]),
-        new Item("Яблоко", 124323, 1561727858000, this.categories[3], this.companies[2]),
-        new Item("Капуста", 1.4, 1561727858000, this.categories[1], this.companies[1])
+        new Item("Огурец", 1221324, 1561727858000, this.companies[1]),
+        new Item("Помидор", 124.43, 1561727858000, this.companies[2]),
+        new Item("Ананас", 12.3, 1561727858000, this.companies[2]),
+        new Item("Апельсин", 124.34, 1561727858000, this.companies[1]),
+        new Item("Яблоко", 124323, 1561727858000, this.companies[2]),
+        new Item("Капуста", 1.4, 1561727858000, this.companies[1])
     ];
 
     /** Добавляет новый айтем в коллекцию */
-    addItem(text: string, price: number, category:string): void {
+    addItem(text: string, price: number, company:string): void {
+
         if(text==null || text.trim()=="" || price==null)
             return;
 
-        let itemCategory = this.categories[0];
-        for(var i = 0; i < this.categories.length; i++){
-            if (this.categories[i].name.toLowerCase().includes(category.toLowerCase())){
-                itemCategory = this.categories[i];
+        let itemCompany = this.companies[0];
+        for(var i = 0; i < this.companies.length; i++){
+            if (this.companies[i].name.toLowerCase().includes(company.toLowerCase())){
+                itemCompany = this.companies[i];
                 break;
             }
         }
         
-        this.items.push(new Item(text, price, (new Date()).getTime(), itemCategory, this.companies[0]));
+        this.items.push(new Item(text, price, (new Date()).getTime(), itemCompany));
     }
 
     /** Сериализует данные в файл и сохраняет его на диск */
@@ -212,7 +221,7 @@ export class AppComponent implements OnInit{
                 key: comp.key,
                 name: comp.name,
                 description: comp.description,
-                color: comp.color
+                category: comp.category.key
             };
 
             companies[i] = serializedCompany;
@@ -228,8 +237,7 @@ export class AppComponent implements OnInit{
                 description: item.description,
                 price: item.price,
                 timestamp: item.timestamp,
-                category: item.category.key,
-                company: item.company.key,
+                company: item.company.key
             };
 
             items[i] = serializedItem;
@@ -264,12 +272,12 @@ export class AppComponent implements OnInit{
         // --- загрузка компаний ---
         this.companies = [];
         for (let i = 0; i < data.companies.length; i++){
-            let key = data.companies[i].key;
-            let name = data.companies[i].name;
-            let description = data.companies[i].description;
-            let color = data.companies[i].color;
+            let key : string = data.companies[i].key;
+            let name : string = data.companies[i].name;
+            let description : string = data.companies[i].description;
+            let category : Category = categoriesDict[data.companies[i].category];
 
-            let comp = new Company(key, name, color);
+            let comp = new Company(key, name, category);
             this.companies[i] = comp;
             companiesDict[comp.key] = comp;
         }
@@ -282,9 +290,8 @@ export class AppComponent implements OnInit{
             let description = data.items[i].description;
             let price = data.items[i].price;
             let timestamp = data.items[i].timestamp;
-            let category = categoriesDict[data.items[i].category];
             let company = companiesDict[data.items[i].company]
-            this.items[i] = new Item(name, price, timestamp, category, company);
+            this.items[i] = new Item(name, price, timestamp, company);
         }
     }
 

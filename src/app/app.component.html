@@ -1,45 +1,45 @@
+<!-- ------------- Раздел ввода данных ------------ -->
+
+<div class="inputarea">
+    <!-- Кнопки сохранения/загрузки -->
+    <div> 
+        <button (click)="saveData()">Сохранить</button>
+        <button (click)="loadData()">Загрузить</button>
+        <button (click)="downloadData()">Экспорт</button>
+        <button (click)="importData()">Импорт</button>
+    </div>
+    <!-- Форма ввода новой покупки -->
+    <h3>Добавление новой строки</h3>
+    <div>
+        <input type="text" [(ngModel)]="text" placeholder="Описание">
+        <input type="text" [(ngModel)]="company" placeholder="Компания">
+        <input type="text" [(ngModel)]="price" placeholder="Сумма">
+        <button (click)="addItem(text, price, company)">+</button>
+    </div>
+</div>
 
 <!-- --------------- Раздел айтемов --------------- -->
 
 <div class="items">
-    <h3>Айтемы</h3>
-
-    <!-- Форма для добавления -->
-    <div> 
-        <table>
-            <tr>
-                <td><button (click)="saveData()">Сохранить</button></td>
-                <td><button (click)="loadData()">Загрузить</button></td>
-                <td><button (click)="downloadData()">Экспорт</button></td>
-                <td><button (click)="importData()">Импорт</button></td>
-            </tr>
-            <tr> 
-                <td><input type="text" [(ngModel)]="text" placeholder="Описание"></td> 
-                <td><input type="text" [(ngModel)]="category" placeholder="Категория"></td>
-                <td><input type="text" [(ngModel)]="price" placeholder="Сумма"></td> 
-                <td><button id="addItemButton" (click)="addItem(text, price, category)">+</button></td>
-            </tr>
-        </table>
-         
-    </div>
+    <h3>Расходы</h3>
 
     <!-- Таблица для отображения -->
     <table class="bordered">
         <thead>
             <tr>
-                <th>Дата</th>
-                <th>Айтем</th>
+                <th width="72px">Дата</th>
+                <th>Описание</th>
                 <th class="cat-icon"></th>
-                <th>Категория</th>
-                <th>Сумма</th>
+                <th>Компания</th>
+                <th width="72px">Сумма</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let item of items"> 
                 <td>{{item.dateString}}</td> 
                 <td>{{item.name}}</td> 
-                <td>  <span class="dot" [style.background-color]="item.category.color"></span>  </td>
-                <td> {{item.category.name}}</td> 
+                <td>  <span class="dot" [style.background-color]="item.company.category.color"></span>  </td>
+                <td> {{item.company.name}}</td> 
                 <td>{{item.price}}</td> 
             </tr>
         </tbody>
@@ -87,7 +87,7 @@
             <tbody>
                 <tr *ngFor="let company of companies"> 
                     <td>{{company.name}}</td> 
-                    <td class="cat-icon">  <span class="dot" [style.background-color]="company.color"></span>  </td>
+                    <td class="cat-icon">  <span class="dot" [style.background-color]="company.category.color"></span>  </td>
                 </tr>
             </tbody>
             
