@@ -67,25 +67,76 @@ export class Company {
 })
 export class AppComponent implements OnInit{ 
 
+    // ---------- Коллекции элементов ----------
+
+    /** Коллекция категорий в приложении */
     categories: Category[] = [];
+    /** Коллекция организаций в приложении */
     companies: Company[] = [];
+    /** Коллекция расходов в приложении */
     items: Item[] = [];
 
-    /** Добавляет новый айтем в коллекцию */
-    addItem(text: string, price: number, company:string): void {
+    // ---------- Ввод новой покупки ----------
 
-        if(text==null || text.trim()=="" || price==null)
+    /** Название новой покупки */
+    newItemName : string;
+    /** Организация новой покупки */
+    newItemCompany: string;
+    /** Стоимость новой покупки */
+    newItemPrice: string;
+    /** Дата новой покупки */
+    newItemDate: string;
+
+    // ---------- Ввод новой организации ----------
+
+    /** Ключ новой организации */
+    newCompanyKey : string;
+    /** Название новой организации */
+    newCompanyName : string;
+    /** Категория новой организации */
+    newCompanyCategory: string;
+
+    // ---------- Ввод новой категории ----------
+
+    /** Ключ новой категории */
+    newategoryKey: string;
+    /** Название новой категории */
+    newCategoryName : string;
+    /** Цвет новой категории */
+    newCategoryColor: string;
+
+    // ---------- Методы ----------
+
+    /** Добавляет новый айтем в коллекцию */
+    addItem(): void {
+
+        // если ничего не введено, выходим
+        if(this.newItemName == null || this.newItemName.trim() == "" || this.newItemPrice == null)
             return;
 
+        // получаем временную отметку из текста
+        let dateParts = this.newItemDate.split(".");
+        let year = Number(dateParts[2]);
+        let month = Number(dateParts[1])-1;
+        let day = Number(dateParts[0]);
+        let timestamp = new Date(year,month,day,0,0,0,0).getTime();
+
+        // подбираем организацию по названию
         let itemCompany = this.companies[0];
         for(var i = 0; i < this.companies.length; i++){
-            if (this.companies[i].name.toLowerCase().includes(company.toLowerCase())){
+            if (this.companies[i].name.toLowerCase().includes(this.newItemCompany.toLowerCase())){
                 itemCompany = this.companies[i];
                 break;
             }
         }
         
-        this.items.push(new Item(text, price, (new Date()).getTime(), itemCompany));
+        // добавляем новую строчку в коллекцию
+        this.items.push(new Item(this.newItemName, Number(this.newItemPrice), timestamp, itemCompany));
+
+        // чистим поля ввода
+        this.newItemName = null;
+        this.newItemCompany = null;
+        this.newItemPrice = null;
     }
 
     /** Сериализует данные в файл и сохраняет его на диск */
@@ -265,5 +316,8 @@ export class AppComponent implements OnInit{
 
     ngOnInit() { 
         this.loadData();
+
+        let options = { year: 'numeric', month: '2-digit', day: 'numeric' };
+        this.newItemDate = (new Date()).toLocaleDateString('ru-RU', options);
     }
 }

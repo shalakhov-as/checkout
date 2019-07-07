@@ -11,10 +11,11 @@
     <!-- Форма ввода новой покупки -->
     <h3>Добавление новой строки</h3>
     <div>
-        <input type="text" [(ngModel)]="text" placeholder="Описание">
-        <input type="text" [(ngModel)]="company" placeholder="Компания">
-        <input type="text" [(ngModel)]="price" placeholder="Сумма">
-        <button (click)="addItem(text, price, company)">+</button>
+        <input type="text" [(ngModel)]="newItemDate" placeholder="Дата">
+        <input type="text" [(ngModel)]="newItemName" placeholder="Описание">
+        <input type="text" [(ngModel)]="newItemCompany" placeholder="Компания">
+        <input type="text" [(ngModel)]="newItemPrice" placeholder="Сумма">
+        <button (click)="addItem()">+</button>
     </div>
 </div>
 
