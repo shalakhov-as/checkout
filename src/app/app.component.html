@@ -54,17 +54,26 @@
                 
     <h3>Категории</h3>
 
+    <div>
+        <input type="text" [(ngModel)]="newCategoryKey" placeholder="Ключ">
+        <input type="text" [(ngModel)]="newCategoryName" placeholder="Название">
+        <input type="text" [(ngModel)]="newCategoryColor" placeholder="Цвет">
+        <button (click)="addCategory()">+</button>
+    </div>
+
     <table class="bordered">
         <thead>
             <tr>
                 <th>Название</th>
                 <th class="cat-icon"></th>
+                <th>Ключ</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let category of categories"> 
                 <td>{{category.name}}</td> 
                 <td class="cat-icon">  <span class="dot" [style.background-color]="category.color"></span>  </td>
+                <td>{{category.key}}</td> 
             </tr>
         </tbody>
         
@@ -77,6 +86,13 @@
 <div class="companies">
 
     <h3>Компании</h3>
+
+    <div>
+        <input type="text" [(ngModel)]="newCompanyKey" placeholder="Ключ">
+        <input type="text" [(ngModel)]="newCompanyName" placeholder="Название">
+        <input type="text" [(ngModel)]="newCompanyCategory" placeholder="Категория">
+        <button (click)="addCompany()">+</button>
+    </div>
 
     <table class="bordered">
             <thead>

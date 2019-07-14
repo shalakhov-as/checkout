@@ -99,7 +99,7 @@ export class AppComponent implements OnInit{
     // ---------- Ввод новой категории ----------
 
     /** Ключ новой категории */
-    newategoryKey: string;
+    newCategoryKey: string;
     /** Название новой категории */
     newCategoryName : string;
     /** Цвет новой категории */
@@ -131,12 +131,62 @@ export class AppComponent implements OnInit{
         }
         
         // добавляем новую строчку в коллекцию
-        this.items.push(new Item(this.newItemName, Number(this.newItemPrice), timestamp, itemCompany));
+        this.items.unshift(new Item(this.newItemName, Number(this.newItemPrice), timestamp, itemCompany));
 
         // чистим поля ввода
         this.newItemName = null;
         this.newItemCompany = null;
         this.newItemPrice = null;
+    }
+
+    /** Добавляет новую организацию в коллекцию */
+    addCompany(): void {
+
+        let key = this.newCompanyKey;
+        let name = this.newCompanyName;
+        let categoryName = this.newCompanyCategory.toLowerCase();
+
+        // если ничего не введено, выходим
+        if(this.checkInput(key) == false || this.checkInput(name) == false || this.checkInput(categoryName) == false)
+            return;
+
+        // подбираем категорию по названию
+        let companyCategory = this.categories[0];
+        for(var i = 0; i < this.categories.length; i++){
+            if (this.categories[i].name.toLowerCase().includes(categoryName)){
+                companyCategory = this.categories[i];
+                break;
+            }
+        }
+        
+        // добавляем новую строчку в коллекцию
+        this.companies.unshift(new Company(key, name, companyCategory));
+
+        // чистим поля ввода
+        this.newCompanyKey = null;
+        this.newCompanyName = null;
+        this.newCompanyCategory = null;
+    }
+
+    /** Добавляет новую категорию в коллекцию */
+    addCategory(): void {
+
+        // переписываем данные из полей в локальные переменные
+        let key = this.newCategoryKey;
+        let name = this.newCategoryName;
+        let color = this.newCategoryColor;
+
+        // если ничего не введено, выходим
+        if(key == null || key.trim() == "")
+            return;
+
+        // добавляем новую строчку в коллекцию
+        this.categories.push(new Category(key, name, color));
+
+        // чистим поля ввода
+        this.newCategoryKey = null;
+        this.newCategoryName = null;
+        this.newCategoryColor = null;
     }
 
     /** Сериализует данные в файл и сохраняет его на диск */
@@ -312,6 +362,14 @@ export class AppComponent implements OnInit{
             let company = companiesDict[data.items[i].company]
             this.items[i] = new Item(name, price, timestamp, company);
         }
+    }
+
+    /** Проверяет ввод на наличие чего-то в нём */
+    checkInput(input: any){
+        if (input == null || input.trim() == "")
+            return false;
+        else
+            return true;
     }
 
     ngOnInit() { 

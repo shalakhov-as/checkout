@@ -56,16 +56,16 @@ h6 {
                             "items categories"
                             "items companies"
                             "footer footer";
-    grid-template-rows: 0px 64px 1fr 1fr 12px;
-    grid-template-columns: 3fr 1fr;
+    grid-template-rows: 0px 76px auto auto 12px;
+    grid-template-columns: 3fr 2fr;
     grid-gap: 12px;
 }
-.header { grid-area: header; }
-.inputarea { grid-area: inputarea; }
-.items { grid-area: items; }
-.categories { grid-area: categories; }
-.companies { grid-area: companies; }
-.footer { grid-area: footer; }
+.header { grid-area: header;}
+.inputarea { grid-area: inputarea;}
+.items { grid-area: items; overflow: scroll;}
+.categories { grid-area: categories;}
+.companies { grid-area: companies;}
+.footer { grid-area: footer;}
 /* td{
     border: 1px white solid;
 } */
@@ -108,7 +108,7 @@ input, button{
     border: 1px solid var(--page-border-color);
     border-radius: var(--border-radius-medium);
     padding: 4px 8px;
-    margin: 0px 6px 0px 6px;
+    margin: 0px 6px 6px 6px;
     box-shadow: inset 0 0 0px var(--shadow-color);
 }
 input:hover, button:hover{
