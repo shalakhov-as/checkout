@@ -1,83 +1,83 @@
 <!-- ------------- Раздел ввода данных ------------ -->
 
 <div class="inputarea">
-    <!-- Кнопки сохранения/загрузки -->
-    <div> 
-        <button (click)="saveData()">Сохранить</button>
-        <button (click)="loadData()">Загрузить</button>
-        <button (click)="downloadData()">Экспорт</button>
-        <button (click)="importData()">Импорт</button>
-    </div>
-    <!-- Форма ввода новой покупки -->
-    <h3>Добавление новой строки</h3>
-    <div>
-        <input type="text" [(ngModel)]="newItemDate" placeholder="Дата">
-        <input type="text" [(ngModel)]="newItemName" placeholder="Описание">
-        <input type="text" [(ngModel)]="newItemCompany" placeholder="Компания">
-        <input type="text" [(ngModel)]="newItemPrice" placeholder="Сумма">
-        <button (click)="addItem()">+</button>
-    </div>
+  <!-- Кнопки сохранения/загрузки -->
+  <div>
+    <button (click)="saveData()">Сохранить</button>
+    <button (click)="loadData()">Загрузить</button>
+    <button (click)="downloadData()">Экспорт</button>
+    <button (click)="importData()">Импорт</button>
+  </div>
+  <!-- Форма ввода новой покупки -->
+  <h3>Добавление новой строки</h3>
+  <div>
+    <input type="text" [(ngModel)]="newItemDate" placeholder="Дата">
+    <input type="text" [(ngModel)]="newItemName" placeholder="Описание">
+    <input type="text" [(ngModel)]="newItemCompany" placeholder="Компания">
+    <input type="text" [(ngModel)]="newItemPrice" placeholder="Сумма">
+    <button (click)="addItem()">+</button>
+  </div>
 </div>
 
 <!-- --------------- Раздел айтемов --------------- -->
 
 <div class="items">
-    <h3>Расходы</h3>
+  <h3>Расходы</h3>
 
-    <!-- Таблица для отображения -->
-    <table class="bordered">
-        <thead>
-            <tr>
-                <th width="72px">Дата</th>
-                <th>Описание</th>
-                <th class="cat-icon"></th>
-                <th>Компания</th>
-                <th width="72px">Сумма</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of items"> 
-                <td>{{item.dateString}}</td> 
-                <td>{{item.name}}</td> 
-                <td>  <span class="dot" [style.background-color]="item.company.category.color"></span>  </td>
-                <td> {{item.company.name}}</td> 
-                <td>{{item.price}}</td> 
-            </tr>
-        </tbody>
-        
-    </table>
+  <!-- Таблица для отображения -->
+  <table class="bordered">
+    <thead>
+      <tr>
+        <th width="72px">Дата</th>
+        <th>Описание</th>
+        <th class="cat-icon"></th>
+        <th>Компания</th>
+        <th width="72px">Сумма</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items">
+        <td>{{item.dateString}}</td>
+        <td>{{item.name}}</td>
+        <td> <span class="dot" [style.background-color]="item.company.category.color"></span> </td>
+        <td> {{item.company.name}}</td>
+        <td>{{item.price}}</td>
+      </tr>
+    </tbody>
+
+  </table>
 </div>
 
 <!-- --------------- Раздел категорий --------------- -->
 
 <div class="categories">
-                
-    <h3>Категории</h3>
 
-    <div>
-        <input type="text" [(ngModel)]="newCategoryKey" placeholder="Ключ">
-        <input type="text" [(ngModel)]="newCategoryName" placeholder="Название">
-        <input type="text" [(ngModel)]="newCategoryColor" placeholder="Цвет">
-        <button (click)="addCategory()">+</button>
-    </div>
+  <h3>Категории</h3>
 
-    <table class="bordered">
-        <thead>
-            <tr>
-                <th>Название</th>
-                <th class="cat-icon"></th>
-                <th>Ключ</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let category of categories"> 
-                <td>{{category.name}}</td> 
-                <td class="cat-icon">  <span class="dot" [style.background-color]="category.color"></span>  </td>
-                <td>{{category.key}}</td> 
-            </tr>
-        </tbody>
-        
-    </table>
+  <div>
+    <input type="text" [(ngModel)]="newCategoryKey" placeholder="Ключ">
+    <input type="text" [(ngModel)]="newCategoryName" placeholder="Название">
+    <input type="text" [(ngModel)]="newCategoryColor" placeholder="Цвет">
+    <button (click)="addCategory()">+</button>
+  </div>
+
+  <table class="bordered">
+    <thead>
+      <tr>
+        <th>Название</th>
+        <th class="cat-icon"></th>
+        <th>Ключ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let category of categories">
+        <td>{{category.name}}</td>
+        <td class="cat-icon"> <span class="dot" [style.background-color]="category.color"></span> </td>
+        <td>{{category.key}}</td>
+      </tr>
+    </tbody>
+
+  </table>
 
 </div>
 
@@ -85,29 +85,29 @@
 
 <div class="companies">
 
-    <h3>Компании</h3>
+  <h3>Компании</h3>
 
-    <div>
-        <input type="text" [(ngModel)]="newCompanyKey" placeholder="Ключ">
-        <input type="text" [(ngModel)]="newCompanyName" placeholder="Название">
-        <input type="text" [(ngModel)]="newCompanyCategory" placeholder="Категория">
-        <button (click)="addCompany()">+</button>
-    </div>
+  <div>
+    <input type="text" [(ngModel)]="newCompanyKey" placeholder="Ключ">
+    <input type="text" [(ngModel)]="newCompanyName" placeholder="Название">
+    <input type="text" [(ngModel)]="newCompanyCategory" placeholder="Категория">
+    <button (click)="addCompany()">+</button>
+  </div>
 
-    <table class="bordered">
-            <thead>
-                <tr>
-                    <th>Название</th>
-                    <th class="cat-icon"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let company of companies"> 
-                    <td>{{company.name}}</td> 
-                    <td class="cat-icon">  <span class="dot" [style.background-color]="company.category.color"></span>  </td>
-                </tr>
-            </tbody>
-            
-        </table>
+  <table class="bordered">
+    <thead>
+      <tr>
+        <th>Название</th>
+        <th class="cat-icon"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let company of companies">
+        <td>{{company.name}}</td>
+        <td class="cat-icon"> <span class="dot" [style.background-color]="company.category.color"></span> </td>
+      </tr>
+    </tbody>
+
+  </table>
 
 </div>
